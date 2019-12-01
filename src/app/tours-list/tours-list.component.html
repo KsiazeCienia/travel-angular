@@ -1,0 +1,4 @@
+<app-filters (applyFilter)="filterApplied($event)"></app-filters>
+<div *ngFor="let tour of filteredTours; index as i" class="container">
+    <app-tour [tour]="tour" (onDelete)="clickedDelete($event)"></app-tour>
+</div>

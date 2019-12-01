@@ -1,0 +1,39 @@
+<div class="container">
+    <h2>Add tour</h2>
+    <form [formGroup]="modelForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" formControlName="name">
+    </div>
+    <div class="form-group">
+        <label>Destination</label>
+        <input type="text" class="form-control" formControlName="destination">
+    </div>
+    <div class="form-group">
+        <label>Start date</label>
+        <input type="text" class="form-control" formControlName="startDate">
+    </div>
+    <div class="form-group">
+        <label>End date</label>
+        <input type="text" class="form-control" formControlName="endDate">
+    </div>
+    <div class="form-group">
+        <label>Price</label>
+        <input type="text" class="form-control" formControlName="price">
+    </div>
+    <div class="form-group">
+        <label>Number of places</label>
+        <input type="text" class="form-control" formControlName="numberOfPlaces">
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <input type="text" class="form-control" formControlName="description">
+    </div>
+    <div class="form-group">
+        <label>Image</label>
+        <input type="text" class="form-control" formControlName="image">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

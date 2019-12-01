@@ -1,0 +1,7 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div>
+    <span class="icon" *ngFor="let index of starNumber">
+        <i [ngClass]="{'filled': index <= rate}" class="fa fa-star" aria-hidden="true" (click)=toggleRating(index)></i>
+    </span>
+</div>
