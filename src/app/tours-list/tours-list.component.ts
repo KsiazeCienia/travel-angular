@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Tour } from 'src/app/tour';
 import { ToursService } from '../tours.service';
-import { PriceFilter } from '../filters/filters.component'
+import { Constants } from '../constants';
 
 @Component({
   selector: 'app-tours-list',
@@ -10,18 +10,28 @@ import { PriceFilter } from '../filters/filters.component'
 })
 export class ToursListComponent implements OnInit {
 
-  filteredTours: Tour[];
-  tours: Tour[];
+  tours: Tour[]
+  searchText: string
+  priceLowerBound: number
+  priceHigherBound: number
+  selectedMonth: string = "Wybierz..."
+  selectedCountry: string = "Wybierz..."
+  months: string[]
+  countries: string[]
+
   private tourService: ToursService
 
   constructor(tourService: ToursService) {
       this.tourService = tourService;
+      this.months = []
+      this.countries = []
   }
 
   ngOnInit() {
     this.tourService.getTours().subscribe( tours => {  
         this.tours = tours 
-        this.filteredTours = tours
+        this.prepareDateFilters(tours)
+        this.prepareCountryFilter(tours)
     });
   }
 
@@ -29,12 +39,22 @@ export class ToursListComponent implements OnInit {
     this.tourService.deleteTour(tour);
   }
 
-  filterApplied(filter: PriceFilter) {
-    console.log("Filter");
-    
-    this.filteredTours = this.tours.filter( 
-      tour => (tour.price > filter.lowerBound && tour.price < filter.upperBound)
-    )
+  private prepareCountryFilter(tours: Tour[]) {
+    for (var tour of tours) {
+      if (!this.countries.includes(tour.destination)) {
+        this.countries.push(tour.destination)
+      }
+    }
   }
 
+  private prepareDateFilters(tours: Tour[]) {
+      var uniqeMonths: number[] = []
+      for (var tour of tours) {
+        let currentMonth = tour.startDate
+        if (!uniqeMonths.includes(currentMonth.getMonth())) {
+          uniqeMonths.push(currentMonth.getMonth())
+          this.months.push(Constants.monthNames[currentMonth.getMonth()])
+        }
+      }
+  }
 }

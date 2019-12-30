@@ -21,31 +21,4 @@ export class TourComponent implements OnInit {
   }
 
   ngOnInit() { }
-
-  bookClicked() {
-    this.tour.numberOfLeftPlaces -= 1;
-    this.cartService.addTour(this.tour);
-  }
-
-  cancelClicked() {
-    this.tour.numberOfLeftPlaces += 1;
-    this.cartService.removeTour(this.tour);
-  }
-
-  deleteClicked() {
-    this.cartService.removeTour(this.tour);
-    this.onDelete.emit(this.tour);
-  }
-
-  ratingClicked(rate: number) {
-    this.tour.rate = rate;
-  }
-
-  isBookButtonHidden() {
-      return this.tour.numberOfLeftPlaces == 0
-  }
-
-  isCancelButtonHidden() {
-    return this.tour.numberOfPlaces == this.tour.numberOfLeftPlaces
-  }
 }

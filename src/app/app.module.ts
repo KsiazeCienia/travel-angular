@@ -10,9 +10,9 @@ import { RateComponent } from './rate/rate.component';
 import { AddTourComponent } from './add-tour/add-tour.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CartComponent } from './cart/cart.component';
-import { FiltersComponent } from './filters/filters.component';
 import { TopMenuComponent } from './top-menu/top-menu.component';
 import { TourDetailsComponent } from './tour-details/tour-details.component';
+import { FilterPipe } from './tours-list/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -23,9 +23,9 @@ import { TourDetailsComponent } from './tour-details/tour-details.component';
     RateComponent,
     AddTourComponent,
     CartComponent,
-    FiltersComponent,
     TopMenuComponent,
     TourDetailsComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
