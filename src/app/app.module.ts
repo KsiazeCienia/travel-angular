@@ -1,6 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { MatSliderModule } from '@angular/material/slider';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import {
+  MatIconModule, MatButtonModule, MatSidenavModule, MatToolbarModule
+} from '@angular/material';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ToursListComponent } from './tours-list/tours-list.component';
@@ -13,6 +22,7 @@ import { CartComponent } from './cart/cart.component';
 import { TopMenuComponent } from './top-menu/top-menu.component';
 import { TourDetailsComponent } from './tour-details/tour-details.component';
 import { FilterPipe } from './tours-list/filter.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -29,9 +39,19 @@ import { FilterPipe } from './tours-list/filter.pipe';
   ],
   imports: [
     BrowserModule,
+    MatSliderModule,
+    MatGridListModule,
+    MatSidenavModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatSelectModule,
     FormsModule,
+    FlexLayoutModule,
+    MatIconModule, 
+    MatButtonModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

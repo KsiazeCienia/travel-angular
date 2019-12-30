@@ -14,8 +14,8 @@ export class ToursListComponent implements OnInit {
   searchText: string
   priceLowerBound: number
   priceHigherBound: number
-  selectedMonth: string = "Wybierz..."
-  selectedCountry: string = "Wybierz..."
+  selectedMonth: string
+  selectedCountry: string
   months: string[]
   countries: string[]
 

@@ -1,3 +1,30 @@
+<mat-grid-list cols="3" rowHeight="170px">
+    <mat-grid-tile>
+        <mat-grid-tile-header>Miesiąc</mat-grid-tile-header>
+        <mat-form-field>
+            <mat-label>Wybierz</mat-label>  
+            <mat-select [(ngModel)]="selectedMonth">
+                <mat-option>Wszystkie</mat-option> 
+                <mat-option *ngFor="let month of months" [value]="month">{{month}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <mat-grid-tile-header>Kraj</mat-grid-tile-header>
+        <mat-form-field>
+            <mat-label>Wybierz</mat-label>    
+            <mat-select [(ngModel)]="selectedCountry">
+                <mat-option>Wszystkie</mat-option>
+                <mat-option *ngFor="let country of countries" [value]="country">{{country}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <mat-grid-tile-header>Cena</mat-grid-tile-header>
+        <mat-slider min="1" max="100" step="1" value="1"></mat-slider>
+    </mat-grid-tile>
+</mat-grid-list>
+
 <div class="col-6">
         <div class="row">
             <label>Cena</label>
@@ -7,17 +34,6 @@
             <div class="col-2">
                 <input type="number" class="input-group-text" [(ngModel)]="priceHigherBound">
             </div>
-            <label>Miesiąc</label>
-            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" [(ngModel)]="selectedMonth">
-                <option selected>Wybierz...</option>
-                <option *ngFor="let month of months" [value]="month">{{month}}</option>
-            </select>
-            <label>Kraj</label>
-            <select class="custom-select my-1 mr-sm-2" [(ngModel)]="selectedCountry">
-                <option value="" selected disabled>Wybierz...</option>
-                <option *ngFor="let country of countries" [value]="country">{{country}}</option>
-            </select>
-        </div>
 </div>
 <div *ngFor="let tour of tours | filter : priceLowerBound:priceHigherBound:selectedMonth:selectedCountry" class="container">
     <app-tour [tour]="tour" (onDelete)="clickedDelete($event)"></app-tour>
