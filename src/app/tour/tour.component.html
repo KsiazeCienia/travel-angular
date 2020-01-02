@@ -1,15 +1,14 @@
-<div class="row">
-    <div class="col-2 ">
-        <img src="{{tour.image}}" class="rounded-image" alt="tourImage">
-    </div>
-    <div class="col">
-        <p>{{ tour.name | uppercase }} {{tour.destination}}</p>
-        <!-- <app-rate (onRating)="ratingClicked($event)"></app-rate> -->
-    </div>
-    <div class="col-2">
-        <p>{{tour.price | currency:'CAD'}}</p>
-    </div>
-    <div class="col-2">
-        <a class="btn btn-primary" routerLink="/tour/{{tour.id}}">Szczegóły</a>
-    </div>
-</div>
+<mat-card class="example-card">
+    <mat-card-header>
+        <mat-card-title>{{tour.destination}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src="{{tour.image}}" class="image" alt="tourImage">
+    <mat-card-content>
+      <p>
+        {{tour.description}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions >
+      <button mat-raised-button color="primary">Szczegóły</button>
+    </mat-card-actions>
+  </mat-card>

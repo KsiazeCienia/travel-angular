@@ -9,6 +9,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   MatIconModule, MatButtonModule, MatSidenavModule, MatToolbarModule, MatFormFieldModule, MatInputModule
 } from '@angular/material';
+import { MatListModule } from '@angular/material/list';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -46,6 +47,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatToolbarModule,
     MatSelectModule,
     FormsModule,
+    MatListModule,
     FlexLayoutModule,
     MatIconModule, 
     MatFormFieldModule,

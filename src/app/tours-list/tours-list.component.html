@@ -33,7 +33,9 @@
     </mat-grid-tile>
 </mat-grid-list>
 
+<mat-grid-list cols="3" rowHeight="700px">
+    <mat-grid-tile *ngFor="let tour of tours | filter : priceLowerBound:priceHigherBound:selectedMonth:selectedCountry" class="container">
+        <app-tour [tour]="tour" (onDelete)="clickedDelete($event)"></app-tour>
+    </mat-grid-tile>
+</mat-grid-list>
 
-<div *ngFor="let tour of tours | filter : priceLowerBound:priceHigherBound:selectedMonth:selectedCountry" class="container">
-    <app-tour [tour]="tour" (onDelete)="clickedDelete($event)"></app-tour>
-</div>
