@@ -13,6 +13,10 @@ export class CartService {
     this.tours = [];
   }
 
+  getTours(): Tour[] {
+    return this.tours
+  }
+
   getTotalPrice() {
     if (this.tours.length <= 0) {
       return 0

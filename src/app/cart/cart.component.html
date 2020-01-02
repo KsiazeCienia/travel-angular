@@ -1,3 +1,24 @@
-<h1>Koszyk</h1>
+<div class="container" style="margin-top: 30px;">
+    <h2>Koszyk</h2>
+
+    <mat-grid-list cols="4" rowHeight="40px" gutterSize="5px">
+        <div *ngFor="let tour of tours; let i = index">
+        <mat-grid-tile>
+            {{i + 1}}. {{tour.name}}
+        </mat-grid-tile>
+        <mat-grid-tile>
+            {{tour.startDate | date: 'dd-MM-yyyy'}} - {{tour.endDate | date: 'dd-MM-yyyy'}}
+        </mat-grid-tile>
+        <mat-grid-tile>
+            {{tour.price | currency:'PLN'}}
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <button mat-icon-button (click)="deleteTour(tour)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </mat-grid-tile>
+        </div>
+    </mat-grid-list>
+
 <label>Całkowita suma {{ getTotalPrice() }}</label><br>
 <label>Ilość rezerwacji {{ totalReservation }}</label>

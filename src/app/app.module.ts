@@ -12,6 +12,7 @@ import {
 import { MatListModule } from '@angular/material/list';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
+import { MatTableModule } from '@angular/material/table';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -54,6 +55,7 @@ import { MatNativeDateModule } from "@angular/material/core";
     FlexLayoutModule,
     MatCarouselModule,
     MatIconModule, 
+    MatTableModule,
     MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,

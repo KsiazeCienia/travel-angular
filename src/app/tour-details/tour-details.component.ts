@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
 import { ToursService } from '../tours.service';
 import { Tour } from 'src/app/tour';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-tour-details',
@@ -14,16 +15,16 @@ export class TourDetailsComponent implements OnInit {
 
   private route: ActivatedRoute
   private toursService: ToursService
+  private cartService: CartService
 
-  constructor(route: ActivatedRoute, toursService: ToursService) {
+  constructor(route: ActivatedRoute, toursService: ToursService, cartService: CartService) {
     this.route = route
     this.toursService = toursService
+    this.cartService = cartService
   }
 
   ngOnInit() {
     this.getTour()
-    console.log("Jesteśmy");
-    
   }
 
   getTour() {
@@ -35,12 +36,12 @@ export class TourDetailsComponent implements OnInit {
 
   bookClicked() {
     this.tour.numberOfLeftPlaces -= 1;
-    // this.cartService.addTour(this.tour);
+    this.cartService.addTour(this.tour);
   }
 
   cancelClicked() {
     this.tour.numberOfLeftPlaces += 1;
-    // this.cartService.removeTour(this.tour);
+    this.cartService.removeTour(this.tour);
   }
 
   deleteClicked() {
