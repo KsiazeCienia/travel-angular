@@ -8,21 +8,31 @@ import { EventEmitter } from '@angular/core';
 })
 export class RateComponent implements OnInit {
 
-  rate: number;
-  starNumber: number[];
-  numberOfStars: number = 5;
-  @Output() onRating: EventEmitter<number>;
+  @Input() rating: number = 3;
+  @Output() ratingUpdated = new EventEmitter();
+
+  ratingArr = [];
+  starCount: number = 5;
 
   constructor() {
-    this.starNumber = Array(this.numberOfStars).map((x,i)=>i);
-    this.rate = 0;
-    this.onRating = new EventEmitter<number>();
   }
 
-  toggleRating(rate: number) {
-    this.rate = rate;
-    this.onRating.emit(rate);
+  ngOnInit() {
+    for (let index = 0; index < this.starCount; index++) {
+      this.ratingArr.push(index);
+    }
+  }
+  
+  onClick(rating: number) {
+    this.ratingUpdated.emit(rating);
+    return false;
   }
 
-  ngOnInit() {}
+  showIcon(index: number) {
+    if (this.rating >= index + 1) {
+      return 'star';
+    } else {
+      return 'star_border';
+    }
+  }
 }

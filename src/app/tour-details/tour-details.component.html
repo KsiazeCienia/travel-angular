@@ -1,8 +1,27 @@
+<div class="container" style="margin-top: 50px;">
+    <mat-card>
+            <div class="mat-display-1">{{tour.name}}</div>
+        <mat-carousel hideArrow color="primary" proportion="40">
+            <mat-carousel-slide image="{{tour.image}}">
+            </mat-carousel-slide>
+            <mat-carousel-slide image="{{tour.image}}">
+            </mat-carousel-slide>
+          </mat-carousel>
+        <mat-card-content>
+            <app-rate rating="{{tour.rate}}" (ratingUpdated)="ratingClicked($event)"></app-rate>
+            <p>
+            {{tour.description}}
+            </p>
+        </mat-card-content>
+        <mat-card-actions >
+            <button mat-raised-button color="primary">Zarezerwuj</button>
+        </mat-card-actions>
+    </mat-card> 
+</div>
 
-<div class="container">
-    <div class="row">
-            <h1>{{tour.name}}</h1>
-        </div>
+
+
+<!-- <div class="container">
     <div class="row justify-content-md-center">
         <div class="col-9">
             <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
@@ -35,5 +54,5 @@
                 <button class="btn btn-danger" (click)=deleteClicked()>Usuń</button>
             </div>
     </div>
-</div>
+</div> -->
 

@@ -10,6 +10,7 @@ import {
   MatIconModule, MatButtonModule, MatSidenavModule, MatToolbarModule, MatFormFieldModule, MatInputModule
 } from '@angular/material';
 import { MatListModule } from '@angular/material/list';
+import { MatCarouselModule } from '@ngmodule/material-carousel';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -49,6 +50,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     MatListModule,
     FlexLayoutModule,
+    MatCarouselModule,
     MatIconModule, 
     MatFormFieldModule,
     MatInputModule,

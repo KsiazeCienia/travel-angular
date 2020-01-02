@@ -1,25 +1,20 @@
 .companyName {
-    font-size: 150%;
+    font-size: 110%;
 } 
-.nav-div {
+
+/* .nav-div {
     overflow: inherit;
-}
+} */
 
 .link-style {
     text-decoration: none;
-    font-size: 110%;
     white-space: normal;
 }
 
-.nav-button {
-    font-size: 110%;
+/* .nav-button {
     min-width: min-content;
-}
+} */
 
-.example-icon {
-    padding: 0 14px;
-}
-
-.example-spacer {
+/* .example-spacer {
     flex: 1 1 auto;
-}
+} */
