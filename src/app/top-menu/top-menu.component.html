@@ -11,12 +11,15 @@
       <span class="example-spacer"></span>
       <div fxShow="true" fxHide.lt-md="true">
         <a mat-button class="link-style" routerLink="tours">Wycieczki</a>
+        <a mat-button class="link-style" routerLink="add/tour">Dodaj</a>
+        <a mat-button class="link-style" routerLink="cart">Koszyk</a>
       </div>
     </mat-toolbar>
     <mat-sidenav-container fxFlexFill class="example-container">
       <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over" opened="false" fxHide.gt-sm="true">
         <div class=".nav-div" fxLayout="column">
           <a mat-button class="link-style" routerLink="tours">Wycieczki</a>
+          <a mat-button class="link-style" routerLink="cart">Koszyk</a>
         </div>
       </mat-sidenav>
       <mat-sidenav-content fxFlexFill>

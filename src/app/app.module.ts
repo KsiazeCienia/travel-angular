@@ -10,6 +10,7 @@ import {
   MatIconModule, MatButtonModule, MatSidenavModule, MatToolbarModule, MatFormFieldModule, MatInputModule
 } from '@angular/material';
 import { MatListModule } from '@angular/material/list';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -25,6 +26,7 @@ import { TopMenuComponent } from './top-menu/top-menu.component';
 import { TourDetailsComponent } from './tour-details/tour-details.component';
 import { FilterPipe } from './tours-list/filter.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatNativeDateModule } from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -52,8 +54,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FlexLayoutModule,
     MatCarouselModule,
     MatIconModule, 
+    MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,
+    MatNativeDateModule,
     MatButtonModule,
     ReactiveFormsModule,
     AppRoutingModule,
