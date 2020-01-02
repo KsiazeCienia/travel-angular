@@ -1,8 +1,7 @@
 <mat-grid-list cols="3" rowHeight="170px">
     <mat-grid-tile>
-        <mat-grid-tile-header>Miesiąc</mat-grid-tile-header>
         <mat-form-field>
-            <mat-label>Wybierz</mat-label>  
+            <mat-label>Miesiąc</mat-label>  
             <mat-select [(ngModel)]="selectedMonth">
                 <mat-option>Wszystkie</mat-option> 
                 <mat-option *ngFor="let month of months" [value]="month">{{month}}</mat-option>
@@ -10,9 +9,8 @@
         </mat-form-field>
     </mat-grid-tile>
     <mat-grid-tile>
-        <mat-grid-tile-header>Kraj</mat-grid-tile-header>
         <mat-form-field>
-            <mat-label>Wybierz</mat-label>    
+            <mat-label>Kraj</mat-label>    
             <mat-select [(ngModel)]="selectedCountry">
                 <mat-option>Wszystkie</mat-option>
                 <mat-option *ngFor="let country of countries" [value]="country">{{country}}</mat-option>
@@ -20,21 +18,22 @@
         </mat-form-field>
     </mat-grid-tile>
     <mat-grid-tile>
-        <mat-grid-tile-header>Cena</mat-grid-tile-header>
-        <mat-slider min="1" max="100" step="1" value="1"></mat-slider>
+        <div class="fields-container">
+            <div class="first">
+            <mat-form-field>
+                <input matInput type="number" placeholder="Min cena" [(ngModel)]="priceLowerBound">
+              </mat-form-field>
+              </div>
+              <div class="second">
+              <mat-form-field>
+                <input matInput type="number" placeholder="Max cena" [(ngModel)]="priceHigherBound">
+              </mat-form-field>
+              </div>
+          </div>
     </mat-grid-tile>
 </mat-grid-list>
 
-<div class="col-6">
-        <div class="row">
-            <label>Cena</label>
-            <div class="col-2">
-                <input type="number" class="input-group-text" [(ngModel)]="priceLowerBound">
-            </div>
-            <div class="col-2">
-                <input type="number" class="input-group-text" [(ngModel)]="priceHigherBound">
-            </div>
-</div>
+
 <div *ngFor="let tour of tours | filter : priceLowerBound:priceHigherBound:selectedMonth:selectedCountry" class="container">
     <app-tour [tour]="tour" (onDelete)="clickedDelete($event)"></app-tour>
 </div>

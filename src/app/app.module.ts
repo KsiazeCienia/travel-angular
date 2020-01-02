@@ -7,7 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
-  MatIconModule, MatButtonModule, MatSidenavModule, MatToolbarModule
+  MatIconModule, MatButtonModule, MatSidenavModule, MatToolbarModule, MatFormFieldModule, MatInputModule
 } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -48,6 +48,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     FlexLayoutModule,
     MatIconModule, 
+    MatFormFieldModule,
+    MatInputModule,
     MatButtonModule,
     ReactiveFormsModule,
     AppRoutingModule,

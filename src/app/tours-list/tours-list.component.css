@@ -1,13 +1,12 @@
-
-
-.max {
-    border-width: 2px;
-    border-color: red;
-    border-style: solid;
+.fields-container {
+    overflow: hidden;
 }
 
-.min {
-    border-width: 2px;
-    border-color: green;
-    border-style: solid;
+.first {
+    margin-right: 30px;
+    float: left;
+}
+
+.second {
+    float: left;
 }
