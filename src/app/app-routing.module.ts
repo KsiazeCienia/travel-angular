@@ -18,7 +18,6 @@ const routes: Routes = [
   {
     path: 'tours',
     component: ToursListComponent,
-    canActivate: [AuthGuard]
   },
   {
     path: 'cart',
@@ -28,7 +27,6 @@ const routes: Routes = [
   {
     path: 'tour/:id',
     component: TourDetailsComponent,
-    canActivate: [AuthGuard]
   },
   {
     path: 'add/tour',

@@ -2,9 +2,7 @@
     <mat-card>
             <div class="mat-display-1">{{tour.name}}</div>
         <mat-carousel hideArrow color="primary" proportion="40">
-            <mat-carousel-slide image="{{tour.image}}">
-            </mat-carousel-slide>
-            <mat-carousel-slide image="{{tour.image}}">
+            <mat-carousel-slide *ngFor="let image of images" image="{{image}}">
             </mat-carousel-slide>
           </mat-carousel>
         <mat-card-content>

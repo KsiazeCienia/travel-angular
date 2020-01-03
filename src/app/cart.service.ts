@@ -21,7 +21,7 @@ export class CartService {
     if (this.tours.length <= 0) {
       return 0
     }
-    let prices = this.tours.map(tour => tour.price)
+    let prices = this.tours.map(tour => tour.dates[0].price)
     let totalPrice = prices.reduce(function(a,b ) { return a + b })
     return totalPrice;
   }

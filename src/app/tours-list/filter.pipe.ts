@@ -11,19 +11,19 @@ export class FilterPipe implements PipeTransform {
 
     if (priceLowerBound) {
       items = items.filter( it => {
-        return it.price >= priceLowerBound
+        return it.dates[0].price >= priceLowerBound
       })
     }
 
     if (priceUpperBound) {
       items = items.filter( it => {
-        return it.price <= priceUpperBound
+        return it.dates[0].price <= priceUpperBound
       })
     }
 
     if (month) {
       items = items.filter( it => {
-        return Constants.monthNames[it.startDate.getMonth()] === month
+        return Constants.monthNames[it.dates[0].startDate.getMonth()] === month
       })
     }
 

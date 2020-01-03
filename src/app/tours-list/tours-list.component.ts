@@ -28,11 +28,9 @@ export class ToursListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tourService.getTours().subscribe( tours => {  
-        this.tours = tours 
-        this.prepareDateFilters(tours)
-        this.prepareCountryFilter(tours)
-    });
+    this.tourService.getTours().subscribe( tours =>
+      this.tours = tours
+    )
   }
 
   clickedDelete(tour: Tour) {
@@ -50,7 +48,7 @@ export class ToursListComponent implements OnInit {
   private prepareDateFilters(tours: Tour[]) {
       var uniqeMonths: number[] = []
       for (var tour of tours) {
-        let currentMonth = tour.startDate
+        let currentMonth = tour.dates[0].startDate
         if (!uniqeMonths.includes(currentMonth.getMonth())) {
           uniqeMonths.push(currentMonth.getMonth())
           this.months.push(Constants.monthNames[currentMonth.getMonth()])

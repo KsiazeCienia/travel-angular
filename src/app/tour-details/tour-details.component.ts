@@ -12,6 +12,7 @@ import { CartService } from '../cart.service';
 export class TourDetailsComponent implements OnInit {
 
   tour: Tour
+  images: string[]
 
   private route: ActivatedRoute
   private toursService: ToursService
@@ -28,19 +29,20 @@ export class TourDetailsComponent implements OnInit {
   }
 
   getTour() {
-    const id = +this.route.snapshot.paramMap.get('id')
-    this.toursService.getTour(id).subscribe( tour =>
+    let id: string = this.route.snapshot.paramMap.get('id').toString()
+    this.toursService.getTour(id).subscribe( tour => {
       this.tour = tour
-    )
+      this.images = tour.images
+    })
   }
 
   bookClicked() {
-    this.tour.numberOfLeftPlaces -= 1;
+    this.tour.dates[0].numberOfLeftPlaces -= 1;
     this.cartService.addTour(this.tour);
   }
 
   cancelClicked() {
-    this.tour.numberOfLeftPlaces += 1;
+    this.tour.dates[0].numberOfLeftPlaces += 1;
     this.cartService.removeTour(this.tour);
   }
 
@@ -54,10 +56,10 @@ export class TourDetailsComponent implements OnInit {
   }
 
   isBookButtonHidden() {
-      return this.tour.numberOfLeftPlaces == 0
+      return this.tour.dates[0].numberOfLeftPlaces == 0
   }
 
   isCancelButtonHidden() {
-    return this.tour.numberOfPlaces == this.tour.numberOfLeftPlaces
+    return this.tour.dates[0].numberOfPlaces == this.tour.dates[0].numberOfLeftPlaces
   }
 }
