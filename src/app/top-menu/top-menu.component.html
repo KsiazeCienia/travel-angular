@@ -13,13 +13,19 @@
         <a mat-button class="link-style" routerLink="tours">Wycieczki</a>
         <a mat-button class="link-style" routerLink="add/tour">Dodaj</a>
         <a mat-button class="link-style" routerLink="cart">Koszyk</a>
+        <a mat-button class="link-style" routerLink="register">Rejestracja</a>
+        <a mat-button class="link-style" routerLink="login">Logowanie</a>
+        <button mat-button class="link-style" (click)="logOut()">Wyloguj</button>
       </div>
     </mat-toolbar>
     <mat-sidenav-container fxFlexFill class="example-container">
       <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over" opened="false" fxHide.gt-sm="true">
         <div class=".nav-div" fxLayout="column">
           <a mat-button class="link-style" routerLink="tours">Wycieczki</a>
+          <a mat-button class="link-style" routerLink="add/tour">Dodaj</a>
           <a mat-button class="link-style" routerLink="cart">Koszyk</a>
+          <a mat-button class="link-style" routerLink="register">Rejestracja</a>
+          <button mat-button class="link-style" (click)="logOut()">Wyloguj</button>
         </div>
       </mat-sidenav>
       <mat-sidenav-content fxFlexFill>

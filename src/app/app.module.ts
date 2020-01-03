@@ -14,6 +14,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { MatTableModule } from '@angular/material/table';
 
+import { AngularFireModule } from "@angular/fire";
+import { AngularFireAuthModule } from "@angular/fire/auth"; import { environment } from '../environments/environment';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ToursListComponent } from './tours-list/tours-list.component';
@@ -28,6 +31,8 @@ import { TourDetailsComponent } from './tour-details/tour-details.component';
 import { FilterPipe } from './tours-list/filter.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatNativeDateModule } from "@angular/material/core";
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +45,9 @@ import { MatNativeDateModule } from "@angular/material/core";
     CartComponent,
     TopMenuComponent,
     TourDetailsComponent,
-    FilterPipe
+    FilterPipe,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +70,9 @@ import { MatNativeDateModule } from "@angular/material/core";
     MatButtonModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,22 @@
+.card {
+    justify-content: center;
+
+    /* position: absolute;
+    height: 350px;
+    width: 250px;
+    margin: -100px 0 0 -200px;
+    top: 50%;
+    left: 50%; */
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+:host {
+    display: flex;
+    justify-content: center;
+    margin: 100px 0px;
+}
+  
