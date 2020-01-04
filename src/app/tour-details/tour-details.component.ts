@@ -13,6 +13,7 @@ export class TourDetailsComponent implements OnInit {
 
   tour: Tour
   images: string[]
+  rate: number = 0
 
   private route: ActivatedRoute
   private toursService: ToursService
@@ -33,6 +34,7 @@ export class TourDetailsComponent implements OnInit {
     this.toursService.getTour(id).subscribe( tour => {
       this.tour = tour
       this.images = tour.images
+      this.rate = tour.rate
     })
   }
 

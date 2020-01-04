@@ -1,4 +1,4 @@
-<div class="container" style="margin-top: 50px;">
+<div class="container" *ngIf="tour" style="margin-top: 50px;">
     <mat-card>
             <div class="mat-display-1">{{tour.name}}</div>
         <mat-carousel hideArrow color="primary" proportion="40">
@@ -6,7 +6,7 @@
             </mat-carousel-slide>
           </mat-carousel>
         <mat-card-content>
-            <app-rate rating="{{tour.rate}}" (ratingUpdated)="ratingClicked($event)"></app-rate>
+            <app-rate rating={{tour.rate}} numberOfRates={{tour.numberOfRates}} (ratingUpdated)="ratingClicked($event)"></app-rate>
             <p>
             {{tour.description}}
             </p>

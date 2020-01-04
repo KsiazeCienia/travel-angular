@@ -7,28 +7,41 @@
     <mat-form-field>
         <input matInput placeholder="Cel podrózy" formControlName="destination">
     </mat-form-field><br>
-    <mat-form-field style="margin-right: 20px;">
-        <input matInput [matDatepicker]="picker" placeholder="Początek wycieczki" formControlName="startDate">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput [matDatepicker]="picker2" placeholder="Koniec wycieczki" formControlName="endDate">
-        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-        <mat-datepicker #picker2></mat-datepicker>
-    </mat-form-field><br>
-    <mat-form-field>
-        <input matInput type="number" placeholder="Cena" formControlName="price">
-    </mat-form-field><br>
-    <mat-form-field>
-        <input matInput type="number" placeholder="Ilość miejsc" formControlName="numberOfPlaces">
-    </mat-form-field><br>
     <mat-form-field>
         <textarea matInput placeholder="Opis" formControlName="description"></textarea>
     </mat-form-field><br>
-    <mat-form-field>
-        <input matInput placeholder="Zdjęcia" formControlName="image">
-    </mat-form-field><br>
-    <button mat-stroked-button type="submit">Zatwierdź</button>
+    <div formArrayName="images">
+        <div *ngFor="let image of images.controls; let i = index">
+            <mat-form-field>
+                <input matInput placeholder="Zdjęcia" [formControlName]="i">
+            </mat-form-field>
+        </div>
+    </div>
+    <button mat-raised-button (click)="addImage()" type="button">Dodaj zdjęcie</button><br>
+    <p></p>
+    <div formArrayName="dates">
+        <div *ngFor="let date of dates.controls; let i = index" [formGroupName]="i">
+            <h4>Turnus {{i + 1}}</h4>
+            <mat-form-field style="margin-right: 20px;">
+                <input matInput [matDatepicker]="picker" placeholder="Początek turnusu" formControlName="startDate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker2" placeholder="Koniec turnusu" formControlName="endDate">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field><br>
+            <mat-form-field>
+                <input matInput type="number" placeholder="Cena" formControlName="price">
+            </mat-form-field><br>
+            <mat-form-field>
+                <input matInput type="number" placeholder="Ilość miejsc" formControlName="numberOfPlaces">
+            </mat-form-field><br>
+        </div>
+    </div>
+    <button mat-raised-button (click)="addDates()" type="button">Dodaj turnus</button><br>
+    <p></p>
+    <button mat-raised-button color="primary" type="submit">Zatwierdź</button>
     </form>
 </div>

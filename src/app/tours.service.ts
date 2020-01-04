@@ -39,14 +39,20 @@ export class ToursService {
     )
   }
 
-  addTour(tour: Tour) {
-    this.tours.push(tour);
+  addTour(tour: any) {
+    this.database.collection('tours').add(tour)
+    .then(function() {
+      console.log("Document successfully written!");
+    })
+    .catch(function(error) {
+      console.error("Error writing document: ", error);
+    });
   }
 
   deleteTour(tour: Tour) {
-    const index = this.tours.indexOf(tour, 0);
+    const index = this.tours.indexOf(tour, 0)
     if (index > -1) {
-      this.tours.splice(index, 1);
+      this.tours.splice(index, 1)
     }
   }
 }
