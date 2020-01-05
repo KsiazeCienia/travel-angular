@@ -6,15 +6,30 @@
             </mat-carousel-slide>
           </mat-carousel>
         <mat-card-content>
+            <p></p>
             <app-rate rating={{tour.rate}} numberOfRates={{tour.numberOfRates}} (ratingUpdated)="ratingClicked($event)"></app-rate>
+            <p></p>
             <p>
             {{tour.description}}
             </p>
+            <mat-form-field>
+                <mat-label>Wybierz termin</mat-label> 
+                <mat-select [(ngModel)]="selectedTerm">
+                    <mat-option *ngFor="let term of tour.terms" [value]="term">
+                        {{term.startDate | date: 'dd-MM-yyyy'}} - {{term.endDate | date: 'dd-MM-yyyy'}}
+                    </mat-option> 
+                </mat-select>
+            </mat-form-field>
+            <div class="fields-container">
+                <mat-form-field>
+                    <input matInput type="number" placeholder="Ilość miejsc" [(ngModel)]="numberOfTakenPlaces">
+                </mat-form-field>
+            </div>
         </mat-card-content>
         <mat-card-actions >
-            <button mat-raised-button color="primary" (click)="bookClicked()">Zarezerwuj</button>
+            <button mat-raised-button color="primary" *ngIf="user != null" (click)="bookClicked()">Zarezerwuj</button>
             <button mat-raised-button color="primary" (click)="cancelClicked()">Anuluj</button>
-            <button mat-raised-button color="primary" (click)="deleteClicked()">Usuń</button>
+            <button mat-raised-button color="primary" *ngIf="isUserAdmin" (click)="deleteClicked()">Usuń</button>
         </mat-card-actions>
     </mat-card> 
 </div>

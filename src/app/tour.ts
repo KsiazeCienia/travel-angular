@@ -3,13 +3,14 @@ export interface Tour {
   name: string
   rate: number
   numberOfRates: number
-  dates: Dates
   destination: string
   description: string
   images: string[]
+  terms: Term[]
 }
 
-export interface Dates {
+export interface Term {
+  id: string
   startDate: Date
   endDate: Date
   price: number

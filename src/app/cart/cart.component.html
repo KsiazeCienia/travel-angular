@@ -1,24 +1,30 @@
 <div class="container" style="margin-top: 30px;">
     <h2>Koszyk</h2>
+    <p></p>
 
-    <mat-grid-list cols="4" rowHeight="40px" gutterSize="5px">
-        <div *ngFor="let tour of tours; let i = index">
+    <mat-grid-list cols="5" rowHeight="40px" gutterSize="5px">
+        <div *ngFor="let reservation of reservations; let i = index">
         <mat-grid-tile>
-            {{i + 1}}. {{tour.name}}
+            {{i + 1}}. {{reservation.tourName}}
         </mat-grid-tile>
         <mat-grid-tile>
-            {{tour.startDate | date: 'dd-MM-yyyy'}} - {{tour.endDate | date: 'dd-MM-yyyy'}}
+            {{reservation.startDate | date: 'dd-MM-yyyy'}} - {{reservation.endDate| date: 'dd-MM-yyyy'}}
         </mat-grid-tile>
         <mat-grid-tile>
-            {{tour.price | currency:'PLN'}}
+            Ilość osób {{reservation.numberOfPlaces}}
         </mat-grid-tile>
         <mat-grid-tile>
-            <button mat-icon-button (click)="deleteTour(tour)">
+            {{reservation.price * reservation.numberOfPlaces | currency:'PLN'}}
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <button mat-icon-button (click)="deleteReservation(reservation)">
                 <mat-icon>delete</mat-icon>
             </button>
         </mat-grid-tile>
         </div>
     </mat-grid-list>
 
-<label>Całkowita suma {{ getTotalPrice() }}</label><br>
-<label>Ilość rezerwacji {{ totalReservation }}</label>
+    <p></p>
+    <label>Całkowita suma: {{ getTotalPrice() | currency: 'PLN' }}</label><br>
+    <button mat-raised-button color="primary" (click)="buyTours()">Kup</button>
+</div>

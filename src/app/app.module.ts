@@ -34,6 +34,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatNativeDateModule } from "@angular/material/core";
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { HistoryComponent } from './history/history.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { LoginComponent } from './login/login.component';
     TourDetailsComponent,
     FilterPipe,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,

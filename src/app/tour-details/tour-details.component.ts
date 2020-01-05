@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
 import { ToursService } from '../tours.service';
-import { Tour } from 'src/app/tour';
+import { Tour, Term } from 'src/app/tour';
 import { CartService } from '../cart.service';
+import { MyUser } from '../user';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-tour-details',
@@ -14,19 +16,29 @@ export class TourDetailsComponent implements OnInit {
   tour: Tour
   images: string[]
   rate: number = 0
+  user: MyUser
+  isUserAdmin: boolean
+  selectedTerm: Term
+  numberOfTakenPlaces: number
 
   private route: ActivatedRoute
   private toursService: ToursService
   private cartService: CartService
+  private authService: AuthService
 
-  constructor(route: ActivatedRoute, toursService: ToursService, cartService: CartService) {
+  constructor(authService: AuthService, route: ActivatedRoute, toursService: ToursService, cartService: CartService) {
     this.route = route
     this.toursService = toursService
     this.cartService = cartService
+    this.authService = authService
   }
 
   ngOnInit() {
     this.getTour()
+    this.authService.user$.subscribe(user => {
+      this.user = user
+      this.isUserAdmin = this.authService.isAdmin(this.user)
+    })
   }
 
   getTour() {
@@ -39,13 +51,13 @@ export class TourDetailsComponent implements OnInit {
   }
 
   bookClicked() {
-    this.tour.dates[0].numberOfLeftPlaces -= 1;
-    this.cartService.addTour(this.tour);
+    this.cartService.reserveTour(this.user, this.tour.id, this.selectedTerm.id, this.numberOfTakenPlaces)
+      .then( val => console.log('Success'))
+      .catch( error => console.log(error) )
   }
 
   cancelClicked() {
-    this.tour.dates[0].numberOfLeftPlaces += 1;
-    this.cartService.removeTour(this.tour);
+
   }
 
   deleteClicked() {
@@ -58,10 +70,10 @@ export class TourDetailsComponent implements OnInit {
   }
 
   isBookButtonHidden() {
-      return this.tour.dates[0].numberOfLeftPlaces == 0
+      return this.tour.terms[0].numberOfLeftPlaces == 0
   }
 
   isCancelButtonHidden() {
-    return this.tour.dates[0].numberOfPlaces == this.tour.dates[0].numberOfLeftPlaces
+    return this.tour.terms[0].numberOfPlaces == this.tour.terms[0].numberOfLeftPlaces
   }
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -7,10 +9,17 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+
   hide = true;
   modelForm: FormGroup;
 
-  constructor() { }
+  private authService: AuthService
+  private router: Router
+
+  constructor(authService: AuthService, router: Router) { 
+    this.authService = authService
+    this.router = router
+  }
 
   ngOnInit() {
     this.modelForm = new FormGroup({
@@ -40,6 +49,11 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-
+    this.authService.register(this.modelForm.value)
+    .then( val => { 
+      this.authService.updateUserData(val.user)
+        .then( val => this.router.navigate(['/tours']))
+     })
+     .catch(error => console.log(error))
   }
 }

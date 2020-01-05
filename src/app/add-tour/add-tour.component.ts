@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormArray, Validators, FormBuilder } from '@angular/forms';
 import { ToursService } from '../tours.service';
-import { calcPossibleSecurityContexts } from '@angular/compiler/src/template_parser/binding_parser';
+import { UUID } from 'angular2-uuid';
 
 @Component({
   selector: 'app-add-tour',
@@ -62,8 +62,9 @@ export class AddTourComponent implements OnInit {
 
   onSubmit() {
     const form = this.modelForm.value
-    const dates = this.modelForm.value.dates.map ( val => {
+    const terms = this.modelForm.value.dates.map ( val => {
       return {
+        id: UUID.UUID(),
         startDate: val.startDate,
         endDate: val.endDate,
         numberOfPlaces: val.numberOfPlaces,
@@ -77,7 +78,7 @@ export class AddTourComponent implements OnInit {
       description: form.description,
       rate: 0,
       numberOfRates: 0,
-      dates: dates,
+      terms: terms,
       images: form.images
     }
     this.toursService.addTour(tour);

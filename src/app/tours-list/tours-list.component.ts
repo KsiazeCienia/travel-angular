@@ -28,9 +28,11 @@ export class ToursListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tourService.getTours().subscribe( tours =>
+    this.tourService.getTours().subscribe( tours => {
       this.tours = tours
-    )
+      this.prepareDateFilters(tours)
+      this.prepareCountryFilter(tours)
+    })
   }
 
   clickedDelete(tour: Tour) {
@@ -38,17 +40,19 @@ export class ToursListComponent implements OnInit {
   }
 
   private prepareCountryFilter(tours: Tour[]) {
-    for (var tour of tours) {
-      if (!this.countries.includes(tour.destination)) {
-        this.countries.push(tour.destination)
+    const destinations = tours.map(tour => tour.destination).reduce( (a, b) => { return a.concat(b) } )
+    for (var destination of destinations) {
+      if (!this.countries.includes(destination)) {
+        this.countries.push(destination)
       }
     }
   }
 
   private prepareDateFilters(tours: Tour[]) {
       var uniqeMonths: number[] = []
-      for (var tour of tours) {
-        let currentMonth = tour.dates[0].startDate
+      const terms = tours.map(tour => tour.terms).reduce( (a, b) => { return a.concat(b) } )
+      for (var term of terms) {
+        let currentMonth = term.startDate
         if (!uniqeMonths.includes(currentMonth.getMonth())) {
           uniqeMonths.push(currentMonth.getMonth())
           this.months.push(Constants.monthNames[currentMonth.getMonth()])

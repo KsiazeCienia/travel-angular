@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from "@angular/router";
+import { MyUser } from '../user';
 
 @Component({
   selector: 'app-top-menu',
@@ -12,6 +13,8 @@ export class TopMenuComponent implements OnInit {
 
   private authService: AuthService
   private router: Router
+  user: MyUser
+  isUserAdmin: boolean
 
   constructor(authService: AuthService, router: Router) {
     this.authService = authService
@@ -19,10 +22,14 @@ export class TopMenuComponent implements OnInit {
   } 
 
   ngOnInit() {
+    this.authService.user$.subscribe(user => {
+      this.user = user
+      this.isUserAdmin = this.authService.isAdmin(this.user)
+    })
   }
 
   logOut() {
     this.authService.logout()
-    .then(val => this.router.navigate(['/login']))
+      .then(val => this.router.navigate(['/login']))
   }
 }

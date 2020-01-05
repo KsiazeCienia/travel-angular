@@ -7,6 +7,7 @@ import { AddTourComponent } from './add-tour/add-tour.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard'
+import { HistoryComponent } from './history/history.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,11 @@ const routes: Routes = [
   {
     path: 'add/tour',
     component: AddTourComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'history',
+    component: HistoryComponent,
     canActivate: [AuthGuard]
   },
   { 
