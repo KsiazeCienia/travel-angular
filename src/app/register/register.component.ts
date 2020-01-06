@@ -10,8 +10,9 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  hide = true;
-  modelForm: FormGroup;
+  error: string
+  hide = true
+  modelForm: FormGroup
 
   private authService: AuthService
   private router: Router
@@ -49,11 +50,17 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
+    this.error = null
+    if (!this.modelForm.valid) { 
+      this.error = "Wprowadzone dane są niepoprawne"
+      return
+    }
+
     this.authService.register(this.modelForm.value)
     .then( val => { 
       this.authService.updateUserData(val.user)
         .then( val => this.router.navigate(['/tours']))
      })
-     .catch(error => console.log(error))
+     .catch(error => this.error ="Email jest zajęty")
   }
 }

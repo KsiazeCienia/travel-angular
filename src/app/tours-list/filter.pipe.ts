@@ -6,33 +6,41 @@ import { Constants } from '../constants';
   name: 'filter'
 })
 export class FilterPipe implements PipeTransform {
-  transform(items: Tour[], priceLowerBound: number, priceUpperBound: number, month: string, country: string): Tour[] {
-    if(!items) return [];
+  transform(tours: Tour[], priceLowerBound: number, priceUpperBound: number, month: string, country: string): Tour[] {
+    if(!tours) return [];
 
     if (priceLowerBound) {
-      items = items.filter( it => {
-        return it.terms[0].price >= priceLowerBound
+      tours = tours.filter( tour => {
+        return tour.terms.map( term => term.price ).findIndex (price => { 
+          return price >= priceLowerBound
+         }) != -1
       })
     }
 
     if (priceUpperBound) {
-      items = items.filter( it => {
-        return it.terms[0].price <= priceUpperBound
+      tours = tours.filter( tour => {
+        return tour.terms.map( term => term.price ).findIndex (price => { 
+          return price <= priceUpperBound
+         }) != -1
       })
     }
 
     if (month) {
-      items = items.filter( it => {
-        return Constants.monthNames[it.terms[0].startDate.getMonth()] === month
+      tours = tours.filter( tour => {
+        return tour.terms
+        .map( term => new Date (term.startDate.seconds * 1000))
+        .findIndex (date => { 
+          return Constants.monthNames[date.getMonth()] === month
+         }) != -1
       })
     }
 
     if (country) {
-      items = items.filter( it => {
+      tours = tours.filter( it => {
         return it.destination === country
       })
     }
 
-    return items
+    return tours
    }
 }

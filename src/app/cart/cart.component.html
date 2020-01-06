@@ -8,7 +8,7 @@
             {{i + 1}}. {{reservation.tourName}}
         </mat-grid-tile>
         <mat-grid-tile>
-            {{reservation.startDate | date: 'dd-MM-yyyy'}} - {{reservation.endDate| date: 'dd-MM-yyyy'}}
+            {{reservation.startDate.seconds * 1000 | date: 'dd-MM-yyyy'}} - {{reservation.endDate.seconds * 1000 | date: 'dd-MM-yyyy'}}
         </mat-grid-tile>
         <mat-grid-tile>
             Ilość osób {{reservation.numberOfPlaces}}
@@ -25,6 +25,6 @@
     </mat-grid-list>
 
     <p></p>
-    <label>Całkowita suma: {{ getTotalPrice() | currency: 'PLN' }}</label><br>
+    <label>Całkowita suma: {{ getTotalPrice() | currency: 'PLN' }}</label><br><p></p>
     <button mat-raised-button color="primary" (click)="buyTours()">Kup</button>
 </div>

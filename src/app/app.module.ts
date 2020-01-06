@@ -6,6 +6,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatSnackBarModule } from '@angular/material';
 import {
   MatIconModule, MatButtonModule, MatSidenavModule, MatToolbarModule, MatFormFieldModule, MatInputModule
 } from '@angular/material';
@@ -71,6 +72,7 @@ import { HistoryComponent } from './history/history.component';
     MatInputModule,
     MatNativeDateModule,
     MatButtonModule,
+    MatSnackBarModule,
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,

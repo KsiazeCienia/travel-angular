@@ -1,6 +1,7 @@
 <mat-card>
     <mat-card-title>Logowanie</mat-card-title>
     <form [formGroup]="modelForm" (ngSubmit)="onSubmit()">
+        <p color="red" *ngIf="error"><font color="red">{{error}}</font></p>
     <mat-form-field>
         <input matInput placeholder="Email" formControlName="email" required>
         <mat-error *ngIf="isEmailInvalid()">{{getEmailErrorMessage()}}</mat-error>
@@ -13,8 +14,8 @@
     <mat-error *ngIf="isPasswordInvalid()">{{getPasswordErrorMessage()}}</mat-error>
     </mat-form-field><br>
     <mat-card-actions>
-        <button mat-stroked-button type="submit">Zaloguj się</button>
-        <button mat-stroked-button type="primary" routerLink="/register">Rejestracja</button>
+        <button mat-raised-button type="submit" color="primary">Zaloguj się</button>
+        <button mat-raised-button type="button" routerLink="/register">Rejestracja</button>
     </mat-card-actions>
     </form>
 </mat-card>

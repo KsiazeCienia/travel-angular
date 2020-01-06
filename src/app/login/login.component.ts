@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
 
+  error: string;
   hide = true;
   modelForm: FormGroup;
 
@@ -48,10 +49,14 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    if (!this.modelForm.valid) { return }
+    this.error = null
+    if (!this.modelForm.valid) { 
+      this.error = "Wprowadzone dane są niepoprawne"
+      return
+    }
 
     this.authService.login(this.modelForm.value)
-    .then(val => this.router.navigate(['/tours']))
-    .catch(error => console.log(error))
+      .then(val => this.router.navigate(['/tours']))
+      .catch(error => this.error = "Błędne dane logowania")
   }
 }

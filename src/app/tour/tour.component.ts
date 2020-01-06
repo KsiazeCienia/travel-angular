@@ -13,11 +13,12 @@ export class TourComponent implements OnInit {
   @Input() tour: Tour
   @Output() onDelete: EventEmitter<Tour>
 
-  private cartService: CartService
-
-  constructor(cartSerevice: CartService) { 
+  constructor() { 
     this.onDelete = new EventEmitter()
-    this.cartService = cartSerevice
+  }
+
+  getLowestPrice() {
+    return Math.max(...this.tour.terms.map( term => term.price ))
   }
 
   ngOnInit() { }

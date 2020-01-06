@@ -5,6 +5,7 @@ import { Tour, Term } from 'src/app/tour';
 import { CartService } from '../cart.service';
 import { MyUser } from '../user';
 import { AuthService } from '../auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-tour-details',
@@ -25,12 +26,14 @@ export class TourDetailsComponent implements OnInit {
   private toursService: ToursService
   private cartService: CartService
   private authService: AuthService
+  private snackBar: MatSnackBar
 
-  constructor(authService: AuthService, route: ActivatedRoute, toursService: ToursService, cartService: CartService) {
+  constructor(authService: AuthService, route: ActivatedRoute, toursService: ToursService, cartService: CartService, snackBar: MatSnackBar) {
     this.route = route
     this.toursService = toursService
     this.cartService = cartService
     this.authService = authService
+    this.snackBar = snackBar
   }
 
   ngOnInit() {
@@ -51,13 +54,30 @@ export class TourDetailsComponent implements OnInit {
   }
 
   bookClicked() {
+    if (this.selectedTerm == null) {
+      this.openSnackBar('Wybierz termin wycieczki!')
+      return
+    }
+
+    if (this.numberOfTakenPlaces <= 0 || this.numberOfTakenPlaces == null) {
+      this.openSnackBar('Wybierz poprawną ilość miejsc')
+      return
+    }
+
+    if (this.numberOfTakenPlaces > this.selectedTerm.numberOfLeftPlaces) {
+      this.openSnackBar('Brak dostępnej ilości miejsc')
+      return
+    }
+
     this.cartService.reserveTour(this.user, this.tour.id, this.selectedTerm.id, this.numberOfTakenPlaces)
-      .then( val => console.log('Success'))
-      .catch( error => console.log(error) )
+      .then( val => this.openSnackBar('Wycieczka została dodana do koszyka!'))
+      .catch( error => this.openSnackBar('Wystąpił błąd. Spróbuj ponownie później'))
   }
 
-  cancelClicked() {
-
+  openSnackBar(message: string) {
+    this.snackBar.open(message, null, {
+      duration: 2000
+    })
   }
 
   deleteClicked() {

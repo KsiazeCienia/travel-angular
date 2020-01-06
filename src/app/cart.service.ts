@@ -30,7 +30,8 @@ export class CartService {
         startDate: reservation.startDate,
         endDate: reservation.endDate,
         numberOfPlaces: reservation.numberOfPlaces,
-        totalPrice: reservation.numberOfPlaces * reservation.price
+        totalPrice: reservation.numberOfPlaces * reservation.price,
+        tourName: reservation.tourName
       }
     })
     const booking = { 
@@ -75,7 +76,6 @@ export class CartService {
           endDate: term.endDate,
           price: term.price
         }
-        console.log(`Pobrałem rezerwacje ${term.startDate}`)
         this.reservations.push(cartRes)
       })
     })

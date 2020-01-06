@@ -13,22 +13,31 @@
             {{tour.description}}
             </p>
             <mat-form-field>
-                <mat-label>Wybierz termin</mat-label> 
+                <mat-label>Dostępne terminy</mat-label> 
                 <mat-select [(ngModel)]="selectedTerm">
                     <mat-option *ngFor="let term of tour.terms" [value]="term">
-                        {{term.startDate | date: 'dd-MM-yyyy'}} - {{term.endDate | date: 'dd-MM-yyyy'}}
+                        {{term.startDate.seconds * 1000 | date: 'dd-MM-yyyy'}} - {{term.endDate.seconds * 1000 | date: 'dd-MM-yyyy'}} Cena: {{term.price | currency: 'PLN'}}
                     </mat-option> 
                 </mat-select>
             </mat-form-field>
-            <div class="fields-container">
+            <div class="fields-container" *ngIf="user != null">
                 <mat-form-field>
                     <input matInput type="number" placeholder="Ilość miejsc" [(ngModel)]="numberOfTakenPlaces">
                 </mat-form-field>
             </div>
+            <div *ngIf="selectedTerm != null && numberOfTakenPlaces > 0">
+                <p></p>
+                <h4>Całkowita kwota: {{ selectedTerm.price * numberOfTakenPlaces | currency: 'PLN' }}</h4>
+            </div>
+            <div *ngIf="user == null">
+                Tylko zalogowani uzytkownicy mogą rezerwować wycieczki. <a routerLink="/login">Zaloguj się</a> 
+              </div>
+              <div *ngIf="user == null">
+                Jezeli nie posiadasz jeszcze konta <a routerLink="/register">zarejestruj się</a> 
+              </div>
         </mat-card-content>
         <mat-card-actions >
             <button mat-raised-button color="primary" *ngIf="user != null" (click)="bookClicked()">Zarezerwuj</button>
-            <button mat-raised-button color="primary" (click)="cancelClicked()">Anuluj</button>
             <button mat-raised-button color="primary" *ngIf="isUserAdmin" (click)="deleteClicked()">Usuń</button>
         </mat-card-actions>
     </mat-card> 

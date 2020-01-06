@@ -21,7 +21,7 @@ export class AuthService {
           return this.firestore.doc(`users/${user.uid}`).get().pipe (
             map( doc => {
               var user = doc.data() as MyUser
-              user.bookings.map( booking => {
+              user.bookings = doc.data().bookings.map( booking => {
                 booking.date = new Date(booking.date.seconds * 1000)
                 booking.products = booking.products.map( product => {
                   product.startDate = new Date(product.startDate.seconds * 1000)

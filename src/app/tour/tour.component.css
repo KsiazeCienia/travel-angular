@@ -4,8 +4,5 @@
 
 .example-card {
     max-width: 400px;
-  }
-
-.actions {
-
+    height: 450px;
 }

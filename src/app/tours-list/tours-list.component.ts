@@ -40,10 +40,9 @@ export class ToursListComponent implements OnInit {
   }
 
   private prepareCountryFilter(tours: Tour[]) {
-    const destinations = tours.map(tour => tour.destination).reduce( (a, b) => { return a.concat(b) } )
-    for (var destination of destinations) {
-      if (!this.countries.includes(destination)) {
-        this.countries.push(destination)
+    for (var tour of tours) {
+      if (!this.countries.includes(tour.destination)) {
+        this.countries.push(tour.destination)
       }
     }
   }
@@ -52,7 +51,7 @@ export class ToursListComponent implements OnInit {
       var uniqeMonths: number[] = []
       const terms = tours.map(tour => tour.terms).reduce( (a, b) => { return a.concat(b) } )
       for (var term of terms) {
-        let currentMonth = term.startDate
+        let currentMonth = new Date(term.startDate.seconds * 1000)
         if (!uniqeMonths.includes(currentMonth.getMonth())) {
           uniqeMonths.push(currentMonth.getMonth())
           this.months.push(Constants.monthNames[currentMonth.getMonth()])

@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Tour } from 'src/app/tour';
 import { CartService } from '../cart.service';
 import { CartReservation } from './cart-reservation';
 import { AuthService } from '../auth.service';
 import { MyUser } from '../user';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-cart',
@@ -18,11 +18,13 @@ export class CartComponent implements OnInit {
 
   private service: CartService
   private authService: AuthService
+  private snackBar: MatSnackBar
 
-  constructor(service: CartService, authService: AuthService) {
+  constructor(service: CartService, authService: AuthService, matSnackBar: MatSnackBar) {
     this.reservations = []
     this.service = service
     this.authService = authService
+    this.snackBar = this.snackBar
   }
 
   ngOnInit() { 
@@ -42,10 +44,14 @@ export class CartComponent implements OnInit {
 
   buyTours() {
     this.service.buyTours(this.user)
-    .then( val => {
-      console.log('Buy success')
+    .then( val => this.openSnackBar('Przedmioty zostały pomyślnie zakupione'))
+    .catch(error => this.openSnackBar('Wystąpił błąd. Spróbuj ponownie później'))
+  }
+
+  openSnackBar(message: string) {
+    this.snackBar.open(message, null, {
+      duration: 2000
     })
-    .catch(error => console.log(error))
   }
 
   deleteReservation(reservation: CartReservation) {
