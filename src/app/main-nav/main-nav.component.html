@@ -1,0 +1,39 @@
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" [ngClass]="{hidden: !(isHandset | async)!.matches}" fixedInViewport="false" [attr.role]="isHandset ? 'dialog' : 'navigation'"
+    [mode]="(isHandset | async)!.matches ? 'over' : 'side'" [opened]="!(isHandset | async)!.matches">
+    <mat-toolbar color="primary">Menu</mat-toolbar>
+    <mat-nav-list>
+      <button mat-button class="link-style" routerLink="tours">Wycieczki</button>
+      <button mat-button class="link-style" *ngIf="isUserAdmin" routerLink="add/tour">Dodaj</button>
+      <button mat-button class="link-style" *ngIf="user != null" routerLink="cart">Koszyk</button>
+      <button mat-button class="link-style" *ngIf="user != null" routerLink="history">Historia</button>
+      <button mat-button class="link-style" *ngIf="user == null" routerLink="register">Rejestracja</button>
+      <button mat-button class="link-style" *ngIf="user == null" routerLink="login">Logowanie</button>
+      <button mat-button class="link-style" *ngIf="user != null" (click)="logOut()">Wyloguj</button>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="(isHandset | async)!.matches">
+        <mat-icon aria-label="Side nav toggle icon">menu
+        </mat-icon>
+      </button>
+      <span>Śląski Tour</span>
+      <button mat-button class="link-style" routerLink="tours">Wycieczki</button>
+      <span class="spacer"></span>
+      <button mat-button class="link-style" *ngIf="user == null" routerLink="register">Rejestracja</button>
+      <button mat-button class="link-style" *ngIf="user == null" routerLink="login">Logowanie</button>
+      <button mat-icon-button *ngIf="user != null" [matMenuTriggerFor]="menu" aria-label="Panel uzytkownika">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="cart">Koszyk</button>
+        <button mat-menu-item routerLink="history">Historia</button>
+        <button mat-menu-item class="link-style" *ngIf="isUserAdmin" routerLink="add/tour">Dodaj wycieczkę</button>
+        <button mat-menu-item (click)="logOut()">Wyloguj się</button>
+      </mat-menu>
+    </mat-toolbar>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

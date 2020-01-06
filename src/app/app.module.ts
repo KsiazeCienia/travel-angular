@@ -10,6 +10,7 @@ import { MatSnackBarModule } from '@angular/material';
 import {
   MatIconModule, MatButtonModule, MatSidenavModule, MatToolbarModule, MatFormFieldModule, MatInputModule
 } from '@angular/material';
+import { MatMenuModule}  from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
@@ -36,6 +37,8 @@ import { MatNativeDateModule } from "@angular/material/core";
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { HistoryComponent } from './history/history.component';
+import { MainNavComponent } from './main-nav/main-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
   declarations: [
@@ -51,12 +54,14 @@ import { HistoryComponent } from './history/history.component';
     FilterPipe,
     RegisterComponent,
     LoginComponent,
-    HistoryComponent
+    HistoryComponent,
+    MainNavComponent
   ],
   imports: [
     BrowserModule,
     MatSliderModule,
     MatGridListModule,
+    MatMenuModule,
     MatSidenavModule,
     MatCardModule,
     MatToolbarModule,
@@ -78,7 +83,8 @@ import { HistoryComponent } from './history/history.component';
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    LayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

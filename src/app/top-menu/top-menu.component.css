@@ -4,6 +4,7 @@
 
 /* .nav-div {
     overflow: inherit;
+
 } */
 
 .link-style {
@@ -11,10 +12,10 @@
     white-space: normal;
 }
 
+.example-fill-remaining-space {
+    flex: 1 1 auto;
+  }
+
 /* .nav-button {
     min-width: min-content;
-} */
-
-/* .example-spacer {
-    flex: 1 1 auto;
 } */
