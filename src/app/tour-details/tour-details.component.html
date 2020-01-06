@@ -7,7 +7,8 @@
           </mat-carousel>
         <mat-card-content>
             <p></p>
-            <app-rate rating={{tour.rate}} numberOfRates={{tour.numberOfRates}} (ratingUpdated)="ratingClicked($event)"></app-rate>
+            <app-rate style="margin-right: 15px;" [isRatingEnabled]="isRatingEnabled" [rating]="rating" numberOfRates={{tour.rates.length}} (ratingUpdated)="ratingClicked($event)"></app-rate>
+            <button *ngIf="isRatingEnabled" [disabled]="selectedRate == null" (click)="rateClicked()"  color="primary" mat-raised-button>Oceń</button>
             <p></p>
             <p>
             {{tour.description}}
@@ -41,4 +42,5 @@
             <button mat-raised-button color="primary" *ngIf="isUserAdmin" (click)="deleteClicked()">Usuń</button>
         </mat-card-actions>
     </mat-card> 
+    <p></p>
 </div>

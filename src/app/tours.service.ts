@@ -3,6 +3,7 @@ import { Tour } from 'src/app/tour';
 import { Observable, of, from } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import {map} from 'rxjs/operators';
+import { MyUser } from './user';
 
 @Injectable({
   providedIn: 'root'
@@ -62,10 +63,12 @@ export class ToursService {
     });
   }
 
+  updateTourRate(tour: Tour, user: MyUser ,rate: number) {
+    tour.rates.push({userID: user.uid, rate: rate})
+    return this.database.doc(`tours/${tour.id}`).set(tour)
+  }
+
   deleteTour(tour: Tour) {
-    const index = this.tours.indexOf(tour, 0)
-    if (index > -1) {
-      this.tours.splice(index, 1)
-    }
+    return this.database.doc(`tours/${tour.id}`).delete
   }
 }

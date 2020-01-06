@@ -8,8 +8,9 @@ import { EventEmitter } from '@angular/core';
 })
 export class RateComponent implements OnInit {
 
-  @Input() rating: number = 3
+  @Input() rating: number = 2
   @Input() numberOfRates: number
+  @Input() isRatingEnabled: boolean = false
   @Output() ratingUpdated = new EventEmitter();
 
   ratingArr = [];
@@ -25,11 +26,14 @@ export class RateComponent implements OnInit {
   }
   
   onClick(rating: number) {
+    if (!this.isRatingEnabled) { return }
+    this.rating = rating
     this.ratingUpdated.emit(rating)
     return false
   }
 
   showIcon(index: number) {
+    console.log(`${this.rating}`)
     if (this.rating >= index + 1) {
       return 'star'
     } else {

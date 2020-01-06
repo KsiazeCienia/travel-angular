@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { ToursService } from '../tours.service';
 import { Tour, Term } from 'src/app/tour';
 import { CartService } from '../cart.service';
@@ -16,24 +16,28 @@ export class TourDetailsComponent implements OnInit {
 
   tour: Tour
   images: string[]
-  rate: number = 0
+  selectedRate: number
+  rating: number = 2
   user: MyUser
   isUserAdmin: boolean
   selectedTerm: Term
   numberOfTakenPlaces: number
+  isRatingEnabled: boolean = false
 
   private route: ActivatedRoute
   private toursService: ToursService
   private cartService: CartService
   private authService: AuthService
   private snackBar: MatSnackBar
+  private router: Router
 
-  constructor(authService: AuthService, route: ActivatedRoute, toursService: ToursService, cartService: CartService, snackBar: MatSnackBar) {
+  constructor(authService: AuthService, route: ActivatedRoute, toursService: ToursService, cartService: CartService, snackBar: MatSnackBar, router: Router) {
     this.route = route
     this.toursService = toursService
     this.cartService = cartService
     this.authService = authService
     this.snackBar = snackBar
+    this.router = router
   }
 
   ngOnInit() {
@@ -41,6 +45,7 @@ export class TourDetailsComponent implements OnInit {
     this.authService.user$.subscribe(user => {
       this.user = user
       this.isUserAdmin = this.authService.isAdmin(this.user)
+      this.canRate()
     })
   }
 
@@ -49,7 +54,11 @@ export class TourDetailsComponent implements OnInit {
     this.toursService.getTour(id).subscribe( tour => {
       this.tour = tour
       this.images = tour.images
-      this.rate = tour.rate
+      const rateSum = tour.rates.map(rate => rate.rate).reduce((acc, a) => acc + a, 0)
+      this.rating = rateSum / tour.rates.length
+      console.log(`Widok ${this.rating}`);
+      
+      this.canRate()
     })
   }
 
@@ -81,12 +90,42 @@ export class TourDetailsComponent implements OnInit {
   }
 
   deleteClicked() {
-    // this.cartService.removeTour(this.tour);
-    // this.onDelete.emit(this.tour);
+    this.toursService.deleteTour(this.tour)
+    .call( val => {
+      this.openSnackBar('Wycieczka pomyślnie usunięta')
+      this.router.navigate['/tours']
+    })
+  }
+
+  canRate() {
+    const userRates = this.tour.rates
+    .map(rate => rate.userID)
+    .includes(this.user.uid)
+
+    if (userRates) {
+      this.isRatingEnabled = false
+      return
+    }
+
+    const orderedUserTours = this.user.bookings
+    .map( booking => { return booking.products.map(product => product.tourID ) })
+    .reduce(function(a,b) { return a.concat(b) })
+
+    this.isRatingEnabled = orderedUserTours.includes(this.tour.id)
   }
 
   ratingClicked(rate: number) {
-    this.tour.rate = rate;
+    this.selectedRate = rate
+  }
+
+  rateClicked() {
+    this.toursService.updateTourRate(this.tour, this.user, this.selectedRate)
+      .then(val => {
+        this.openSnackBar("Ocena została pomyślnie dodana")
+        const rateSum = this.tour.rates.map(rate => rate.rate).reduce((acc, a) => acc + a, 0)
+        this.rating = rateSum / this.tour.rates.length
+      })
+      .catch( error => this.openSnackBar("Błąd dodania oceny. Spróbuj ponownie później"))
   }
 
   isBookButtonHidden() {
