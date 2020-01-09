@@ -23,7 +23,7 @@
         </mat-grid-tile>
         </div>
     </mat-grid-list>
-
+    <mat-spinner *ngIf="showSpinner" class="spiner"></mat-spinner>
     <p></p>
     <label>Całkowita suma: {{ getTotalPrice() | currency: 'PLN' }}</label><br><p></p>
     <button mat-raised-button color="primary" (click)="buyTours()">Kup</button>

@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class AddTourComponent implements OnInit {
 
   modelForm: FormGroup;
+  showSpinner = false
 
   private toursService: ToursService
   private formBuilder: FormBuilder
@@ -103,6 +104,8 @@ export class AddTourComponent implements OnInit {
       return
     }
 
+    this.showSpinner = true
+
     const form = this.modelForm.value
     const terms = this.modelForm.value.dates.map ( val => {
       return {
@@ -124,9 +127,13 @@ export class AddTourComponent implements OnInit {
     }
     this.toursService.addTour(tour)
       .then(val => { 
+        this.showSpinner = false
         this.openSnackBar('Wycieczka pomyślenie dodana')
         this.router.navigate(['/tours'])
       })
-      .catch( error => this.openSnackBar('Błąd podczas dodawania wycieczki. Spróbuj ponownie później'))
+      .catch( error => {
+        this.showSpinner = false
+        this.openSnackBar('Błąd podczas dodawania wycieczki. Spróbuj ponownie później')
+      })
   }
 }

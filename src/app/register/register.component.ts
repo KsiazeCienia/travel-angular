@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit {
   error: string
   hide = true
   modelForm: FormGroup
+  showSpinner = false
 
   private authService: AuthService
   private router: Router
@@ -56,11 +57,18 @@ export class RegisterComponent implements OnInit {
       return
     }
 
+    this.showSpinner = true
     this.authService.register(this.modelForm.value)
     .then( val => { 
       this.authService.updateUserData(val.user)
-        .then( val => this.router.navigate(['/tours']))
+        .then( val => {
+          this.showSpinner = false
+          this.router.navigate(['/tours'])
+        })
      })
-     .catch(error => this.error ="Email jest zajęty")
+     .catch(error =>  {
+       this.showSpinner = false
+       this.error ="Email jest zajęty"
+      })
   }
 }

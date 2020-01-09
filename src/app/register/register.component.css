@@ -1,12 +1,5 @@
 .card {
     justify-content: center;
-
-    /* position: absolute;
-    height: 350px;
-    width: 250px;
-    margin: -100px 0 0 -200px;
-    top: 50%;
-    left: 50%; */
 }
 
 .center {
@@ -20,3 +13,12 @@
     margin: 100px 0px;
 }
   
+
+.spiner {
+    position: absolute;
+    z-index: 1;
+    margin-top: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }

@@ -3,11 +3,11 @@
     justify-content: center;
 }
 
-/* :host {
+:host {
     display: flex;
     justify-content: center;
     margin: 100px 0px;
-} */
+}
 
 .spiner {
     position: absolute;

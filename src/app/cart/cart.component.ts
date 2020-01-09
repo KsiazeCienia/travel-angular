@@ -14,6 +14,7 @@ import { MatSnackBar } from '@angular/material';
 export class CartComponent implements OnInit {
 
   reservations: CartReservation[]
+  showSpinner = true
   user: MyUser
 
   private service: CartService
@@ -31,6 +32,7 @@ export class CartComponent implements OnInit {
     this.authService.user$.subscribe(user => {
       this.reservations = this.service.getReservation(user)
       this.user = user
+      this.showSpinner = false
     })
   }
 
@@ -43,9 +45,16 @@ export class CartComponent implements OnInit {
   }
 
   buyTours() {
+    this.showSpinner = true
     this.service.buyTours(this.user)
-    .then( val => this.openSnackBar('Przedmioty zostały pomyślnie zakupione'))
-    .catch(error => this.openSnackBar('Wystąpił błąd. Spróbuj ponownie później'))
+    .then( val => {
+      this.showSpinner = false
+      this.openSnackBar('Przedmioty zostały pomyślnie zakupione')
+    })
+    .catch(error => {
+      this.showSpinner = false
+      this.openSnackBar('Wystąpił błąd. Spróbuj ponownie później')
+    })
   }
 
   openSnackBar(message: string) {

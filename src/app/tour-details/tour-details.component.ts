@@ -23,6 +23,7 @@ export class TourDetailsComponent implements OnInit {
   selectedTerm: Term
   numberOfTakenPlaces: number
   isRatingEnabled: boolean = false
+  showSpinner = true
 
   private route: ActivatedRoute
   private toursService: ToursService
@@ -56,8 +57,7 @@ export class TourDetailsComponent implements OnInit {
       this.images = tour.images
       const rateSum = tour.rates.map(rate => rate.rate).reduce((acc, a) => acc + a, 0)
       this.rating = rateSum / tour.rates.length
-      console.log(`Widok ${this.rating}`);
-      
+      this.showSpinner = false
       this.canRate()
     })
   }
@@ -78,9 +78,16 @@ export class TourDetailsComponent implements OnInit {
       return
     }
 
+    this.showSpinner = true
     this.cartService.reserveTour(this.user, this.tour, this.selectedTerm.id, this.numberOfTakenPlaces)
-      .then( val => this.openSnackBar('Wycieczka została dodana do koszyka!'))
-      .catch( error => this.openSnackBar('Wystąpił błąd. Spróbuj ponownie później'))
+      .then( val => {
+        this.showSpinner = false
+        this.openSnackBar('Wycieczka została dodana do koszyka!')
+      })
+      .catch( error => {
+        this.showSpinner = false
+        this.openSnackBar('Wystąpił błąd. Spróbuj ponownie później')
+      })
   }
 
   openSnackBar(message: string) {
@@ -90,8 +97,10 @@ export class TourDetailsComponent implements OnInit {
   }
 
   deleteClicked() {
+    this.showSpinner = true
     this.toursService.deleteTour(this.tour)
     .call( val => {
+      this.showSpinner = false
       this.openSnackBar('Wycieczka pomyślnie usunięta')
       this.router.navigate['/tours']
     })
@@ -119,13 +128,18 @@ export class TourDetailsComponent implements OnInit {
   }
 
   rateClicked() {
+    this.showSpinner = true
     this.toursService.updateTourRate(this.tour, this.user, this.selectedRate)
       .then(val => {
+        this.showSpinner = false
         this.openSnackBar("Ocena została pomyślnie dodana")
         const rateSum = this.tour.rates.map(rate => rate.rate).reduce((acc, a) => acc + a, 0)
         this.rating = rateSum / this.tour.rates.length
       })
-      .catch( error => this.openSnackBar("Błąd dodania oceny. Spróbuj ponownie później"))
+      .catch( error => {
+        this.showSpinner = false
+        this.openSnackBar("Błąd dodania oceny. Spróbuj ponownie później")
+      })
   }
 
   isBookButtonHidden() {

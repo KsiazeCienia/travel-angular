@@ -10,6 +10,7 @@ import { Booking } from '../user';
 export class HistoryComponent implements OnInit {
 
   bookings: Booking[]
+  showSpinner = true
 
   private authService: AuthService
 
@@ -19,8 +20,9 @@ export class HistoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.user$.subscribe( user => 
+    this.authService.user$.subscribe( user => {
       this.bookings = user.bookings
-    )
+      this.showSpinner = false
+    })
   }
 }
