@@ -10,9 +10,10 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
 
-  error: string;
-  hide = true;
-  modelForm: FormGroup;
+  error: string
+  hide = true
+  modelForm: FormGroup
+  showSpinner = false
 
   private authService: AuthService
   private router: Router
@@ -55,8 +56,15 @@ export class LoginComponent implements OnInit {
       return
     }
 
+    this.showSpinner = true
     this.authService.login(this.modelForm.value)
-      .then(val => this.router.navigate(['/tours']))
-      .catch(error => this.error = "Błędne dane logowania")
+      .then(val => {
+        this.showSpinner = false
+        this.router.navigate(['/tours'])
+      })
+      .catch(error => {
+        this.showSpinner = false
+        this.error = "Błędne dane logowania"
+      })
   }
 }

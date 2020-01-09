@@ -10,7 +10,7 @@
     </mat-grid-tile>
     <mat-grid-tile>
         <mat-form-field>
-            <mat-label>Kraj</mat-label>    
+            <mat-label>Miasto</mat-label>    
             <mat-select [(ngModel)]="selectedCountry">
                 <mat-option>Wszystkie</mat-option>
                 <mat-option *ngFor="let country of countries" [value]="country">{{country}}</mat-option>
@@ -32,6 +32,8 @@
           </div>
     </mat-grid-tile>
 </mat-grid-list>
+
+<mat-spinner *ngIf="showSpinner" class="spiner"></mat-spinner>
 
 <mat-grid-list class="list" cols="3">
     <mat-grid-tile *ngFor="let tour of tours | filter : priceLowerBound:priceHigherBound:selectedMonth:selectedCountry" class="container">

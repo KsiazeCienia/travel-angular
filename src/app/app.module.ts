@@ -15,6 +15,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { MatTableModule } from '@angular/material/table';
+import { MatProgressSpinnerModule } from '@angular/material'
 
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth"; import { environment } from '../environments/environment';
@@ -74,6 +75,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatTableModule,
     MatDatepickerModule,
     MatFormFieldModule,
+    MatProgressSpinnerModule,
     MatInputModule,
     MatNativeDateModule,
     MatButtonModule,
