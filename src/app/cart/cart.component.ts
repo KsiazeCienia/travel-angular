@@ -21,11 +21,11 @@ export class CartComponent implements OnInit {
   private authService: AuthService
   private snackBar: MatSnackBar
 
-  constructor(service: CartService, authService: AuthService, matSnackBar: MatSnackBar) {
+  constructor(service: CartService, authService: AuthService, snackBar: MatSnackBar) {
     this.reservations = []
     this.service = service
     this.authService = authService
-    this.snackBar = this.snackBar
+    this.snackBar = snackBar
   }
 
   ngOnInit() { 
@@ -48,6 +48,7 @@ export class CartComponent implements OnInit {
     this.showSpinner = true
     this.service.buyTours(this.user)
     .then( val => {
+      this.reservations = []
       this.showSpinner = false
       this.openSnackBar('Przedmioty zostały pomyślnie zakupione')
     })

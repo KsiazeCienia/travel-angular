@@ -40,6 +40,7 @@ export class CartService {
     }
     user.bookings.push(booking)
     user.reservations = []
+    this.reservations = []
     return this.firestore.collection('users').doc(user.uid).update(user)
   }
 

@@ -135,6 +135,7 @@ export class TourDetailsComponent implements OnInit {
         this.openSnackBar("Ocena została pomyślnie dodana")
         const rateSum = this.tour.rates.map(rate => rate.rate).reduce((acc, a) => acc + a, 0)
         this.rating = rateSum / this.tour.rates.length
+        this.isRatingEnabled = false
       })
       .catch( error => {
         this.showSpinner = false
