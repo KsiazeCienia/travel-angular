@@ -80,8 +80,26 @@ export class AddTourComponent implements OnInit {
     return this.dates.controls[index].get(controlName).hasError(errorName)
   }
 
+  deleteTerm(index: number) {
+    this.dates.removeAt(index)
+  }
+
+  deleteImage(index: number) {
+    this.images.removeAt(index)
+  }
+
   onSubmit() {
     if (this.modelForm.invalid) { 
+      return
+    }
+
+    if (this.dates.length == 0) {
+      this.openSnackBar('Musisz dodać co najmniej jeden turnus')
+      return
+    }
+
+    if (this.images.length == 0) {
+      this.openSnackBar('Musisz dodać co najmniej jeden obrazek')
       return
     }
 

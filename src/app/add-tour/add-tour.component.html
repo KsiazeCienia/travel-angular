@@ -18,6 +18,9 @@
             <mat-form-field>
                 <input matInput placeholder="URL zdjęcia" [formControlName]="i" required>
             </mat-form-field>
+            <button mat-icon-button (click)="deleteImage(i)">
+                <mat-icon>delete</mat-icon>
+            </button>
         </div>
     </div>
     <button mat-raised-button (click)="addImage()" type="button">Dodaj zdjęcie</button><br>
@@ -47,7 +50,7 @@
                 <mat-error *ngIf="hasTermError(i, 'numberOfPlaces', 'pattern')">To pole musi zawierać liczbę</mat-error>
                 <mat-error *ngIf="hasTermError(i, 'numberOfPlaces', 'required')">To pole jest wymagane</mat-error>
             </mat-form-field>
-            <button mat-icon-button >
+            <button mat-icon-button (click)="deleteTerm(i)">
                 <mat-icon>delete</mat-icon>
             </button>
         </div>
