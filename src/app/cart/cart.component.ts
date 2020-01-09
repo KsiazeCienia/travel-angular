@@ -16,6 +16,9 @@ export class CartComponent implements OnInit {
   reservations: CartReservation[]
   showSpinner = true
   user: MyUser
+  get empty(): boolean {
+    return (this.reservations.length == 0)
+  }
 
   private service: CartService
   private authService: AuthService

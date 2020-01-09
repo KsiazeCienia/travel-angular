@@ -2,6 +2,8 @@
     <h2>Zamówienia</h2>
     <p></p>
 
+    <h4 *ngIf="empty">Nie posiadasz jeszcze zadnych zamówień</h4>
+
     <mat-grid-list cols="4" rowHeight="40px" gutterSize="5px">
         <div *ngFor="let booking of bookings">
             <mat-grid-tile colspan="4" rowspan="1">

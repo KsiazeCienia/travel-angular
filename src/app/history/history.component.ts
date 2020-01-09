@@ -11,6 +11,7 @@ export class HistoryComponent implements OnInit {
 
   bookings: Booking[]
   showSpinner = true
+  empty = true
 
   private authService: AuthService
 
@@ -23,6 +24,7 @@ export class HistoryComponent implements OnInit {
     this.authService.user$.subscribe( user => {
       this.bookings = user.bookings
       this.showSpinner = false
+      this.empty = (user.bookings.length == 0)
     })
   }
 }

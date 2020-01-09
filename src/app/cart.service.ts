@@ -45,6 +45,7 @@ export class CartService {
   }
 
   getReservation(user: MyUser): CartReservation[] {
+    this.reservations = []
     this.getReservedTour(user)
     return this.reservations
   }
