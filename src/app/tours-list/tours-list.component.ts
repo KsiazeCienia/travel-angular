@@ -16,6 +16,7 @@ export class ToursListComponent implements OnInit {
   priceHigherBound: number
   selectedMonth: string
   selectedCountry: string
+  query: string
   months: string[]
   countries: string[]
   showSpinner = true

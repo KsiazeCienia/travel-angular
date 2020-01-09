@@ -6,7 +6,7 @@ import { Constants } from '../constants';
   name: 'filter'
 })
 export class FilterPipe implements PipeTransform {
-  transform(tours: Tour[], priceLowerBound: number, priceUpperBound: number, month: string, country: string): Tour[] {
+  transform(tours: Tour[], query: string, priceLowerBound: number, priceUpperBound: number, month: string, country: string): Tour[] {
     if(!tours) return [];
 
     if (priceLowerBound) {
@@ -14,6 +14,14 @@ export class FilterPipe implements PipeTransform {
         return tour.terms.map( term => term.price ).findIndex (price => { 
           return price >= priceLowerBound
          }) != -1
+      })
+    }
+
+    if (query) {
+      tours = tours.filter ( tour => {
+        const name = tour.name.toLowerCase()
+        const lowQuery = query.toLowerCase()
+        return name.includes(lowQuery)
       })
     }
 
