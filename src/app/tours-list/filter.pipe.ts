@@ -26,13 +26,13 @@ export class FilterPipe implements PipeTransform {
     }
 
     if (month) {
-      tours = tours.filter( tour => {
-        return tour.terms
-        .map( term => new Date (term.startDate.seconds * 1000))
-        .findIndex (date => { 
-          return Constants.monthNames[date.getMonth()] === month
-         }) != -1
-      })
+      // tours = tours.filter( tour => {
+      //   return tour.terms
+      //   .map( term => new Date (term.startDate.seconds * 1000))
+      //   .findIndex (date => { 
+      //     return Constants.monthNames[date.getMonth()] === month
+      //    }) != -1
+      // })
     }
 
     if (country) {

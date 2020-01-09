@@ -7,6 +7,7 @@ import { AddTourComponent } from './add-tour/add-tour.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard'
+import { AdminGuard } from './admin.guard'
 import { HistoryComponent } from './history/history.component';
 
 
@@ -32,7 +33,7 @@ const routes: Routes = [
   {
     path: 'add/tour',
     component: AddTourComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AdminGuard]
   },
   {
     path: 'history',

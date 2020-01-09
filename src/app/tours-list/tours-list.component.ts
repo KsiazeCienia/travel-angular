@@ -48,14 +48,14 @@ export class ToursListComponent implements OnInit {
   }
 
   private prepareDateFilters(tours: Tour[]) {
-      var uniqeMonths: number[] = []
-      const terms = tours.map(tour => tour.terms).reduce( (a, b) => { return a.concat(b) } )
-      for (var term of terms) {
-        let currentMonth = new Date(term.startDate.seconds * 1000)
-        if (!uniqeMonths.includes(currentMonth.getMonth())) {
-          uniqeMonths.push(currentMonth.getMonth())
-          this.months.push(Constants.monthNames[currentMonth.getMonth()])
-        }
-      }
+      // var uniqeMonths: number[] = []
+      // const terms = tours.map(tour => tour.terms).reduce( (a, b) => { return a.concat(b) } )
+      // for (var term of terms) {
+      //   let currentMonth = new Date(term.startDate.seconds * 1000)
+      //   if (!uniqeMonths.includes(currentMonth.getMonth())) {
+      //     uniqeMonths.push(currentMonth.getMonth())
+      //     this.months.push(Constants.monthNames[currentMonth.getMonth()])
+      //   }
+      // }
   }
 }
