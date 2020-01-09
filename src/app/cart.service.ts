@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Tour } from 'src/app/tour';
-import { Observable } from 'rxjs';
-import { AuthService } from './auth.service';
 import { MyUser } from './user';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ToursService } from './tours.service';
 import { CartReservation } from './cart/cart-reservation'
-import { element } from 'protractor';
+import { Observable, zip, merge } from 'rxjs';
+import {Promise} from 'es6-promise';
+import { Tour } from './tour';
+
 
 @Injectable({
   providedIn: 'root'
@@ -48,10 +48,13 @@ export class CartService {
     return this.reservations
   }
 
-  reserveTour(user: MyUser, tourID: string, termID: string, numberOfPlaces: number) {
-    const reservation = { tourID: tourID, termID: termID, numberOfPlaces: numberOfPlaces }
+  reserveTour(user: MyUser, tour: Tour, termID: string, numberOfPlaces: number) {
+    const reservation = { tourID: tour.id, termID: termID, numberOfPlaces: numberOfPlaces }
     user.reservations.push(reservation)
-    return this.firestore.collection('users').doc(user.uid).update(user)
+
+    var requests = Promise.all([this.firestore.collection('users').doc(user.uid).update(user), 
+                                this.toursService.updateTermNumberOfPlaces(tour, termID, numberOfPlaces)])
+    return requests
   }
 
   deleteReservation(user: MyUser, reservation: CartReservation) {

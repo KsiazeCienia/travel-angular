@@ -68,6 +68,12 @@ export class ToursService {
     return this.database.doc(`tours/${tour.id}`).set(tour)
   }
 
+  updateTermNumberOfPlaces(tour: Tour, termID: string, numberOfPlaces: number) {
+      const termIndex = tour.terms.findIndex(term => term.id = termID)
+      tour.terms[termIndex].numberOfLeftPlaces = tour.terms[termIndex].numberOfLeftPlaces - numberOfPlaces
+      return this.database.doc(`tours/${tour.id}`).set(tour) 
+  }
+
   deleteTour(tour: Tour) {
     return this.database.doc(`tours/${tour.id}`).delete
   }

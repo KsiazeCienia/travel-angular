@@ -78,7 +78,7 @@ export class TourDetailsComponent implements OnInit {
       return
     }
 
-    this.cartService.reserveTour(this.user, this.tour.id, this.selectedTerm.id, this.numberOfTakenPlaces)
+    this.cartService.reserveTour(this.user, this.tour, this.selectedTerm.id, this.numberOfTakenPlaces)
       .then( val => this.openSnackBar('Wycieczka została dodana do koszyka!'))
       .catch( error => this.openSnackBar('Wystąpił błąd. Spróbuj ponownie później'))
   }

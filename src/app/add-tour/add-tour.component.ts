@@ -22,15 +22,15 @@ export class AddTourComponent implements OnInit {
 
   ngOnInit() { 
     this.modelForm = this.formBuilder.group({
-      name: '',
-      destination: '',
-      description: '',
+      name: ['', Validators.required],
+      destination: ['', Validators.required],
+      description: ['', Validators.required],
       dates: this.formBuilder.array([
         this.formBuilder.group({
-          startDate: '',
-          endDate: '',
-          price: '',
-          numberOfPlaces: ''
+          startDate: ['', Validators.required],
+          endDate: ['', Validators.required],
+          price: ['', Validators.required],
+          numberOfPlaces: ['', [Validators.pattern('[0-9]*')]]
         })
       ]),
       images: this.formBuilder.array([this.formBuilder.control('')])
@@ -58,6 +58,10 @@ export class AddTourComponent implements OnInit {
         numberOfPlaces: ''
       })
     )
+  }
+
+  hasError = (controlName: string, errorName: string) => {
+    return this.modelForm.controls[controlName].hasError(errorName);
   }
 
   onSubmit() {
