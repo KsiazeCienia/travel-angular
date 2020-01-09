@@ -54,13 +54,7 @@ export class ToursService {
   }
 
   addTour(tour: any) {
-    this.database.collection('tours').add(tour)
-    .then( val => {
-      console.log("Document successfully written!");
-    })
-    .catch(function(error) {
-      console.error("Error writing document: ", error);
-    });
+    return this.database.collection('tours').add(tour)
   }
 
   updateTourRate(tour: Tour, user: MyUser ,rate: number) {
