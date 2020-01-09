@@ -1,42 +1,44 @@
-<mat-grid-list cols="4" rowHeight="170px">
-    <mat-grid-tile>
-        <mat-form-field>
+<!-- <mat-grid-list cols="4" rowHeight="170px"> -->
+    <!-- <mat-grid-tile> -->
+        <p></p>
+        <mat-form-field style="margin-right: 50px; margin-left: 45px;">
             <input matInput placeholder="Wyszkukaj" [(ngModel)]="query">
         </mat-form-field>
-    </mat-grid-tile>
-    <mat-grid-tile>
-        <mat-form-field>
+    <!-- </mat-grid-tile> -->
+    <!-- <mat-grid-tile> -->
+        <mat-form-field style="margin-right: 50px;">
             <mat-label>Miesiąc</mat-label>  
             <mat-select [(ngModel)]="selectedMonth">
                 <mat-option>Wszystkie</mat-option> 
                 <mat-option *ngFor="let month of months" [value]="month">{{month}}</mat-option>
             </mat-select>
         </mat-form-field>
-    </mat-grid-tile>
-    <mat-grid-tile>
-        <mat-form-field>
+    <!-- </mat-grid-tile> -->
+    <!-- <mat-grid-tile> -->
+        <mat-form-field style="margin-right: 50px;">
             <mat-label>Miasto</mat-label>    
             <mat-select [(ngModel)]="selectedCountry">
                 <mat-option>Wszystkie</mat-option>
                 <mat-option *ngFor="let country of countries" [value]="country">{{country}}</mat-option>
             </mat-select>
         </mat-form-field>
-    </mat-grid-tile>
-    <mat-grid-tile>
-        <div class="fields-container">
-            <div class="first">
-            <mat-form-field>
+    <!-- </mat-grid-tile> -->
+    <!-- <mat-grid-tile> -->
+        <!-- <div class="fields-container"> -->
+            <!-- <div class="first"> -->
+            <mat-form-field style="margin-right: 15px;">
                 <input matInput type="number" placeholder="Min cena" [(ngModel)]="priceLowerBound">
               </mat-form-field>
-              </div>
-              <div class="second">
+              <!-- </div> -->
+              <!-- <div class="second"> -->
               <mat-form-field>
                 <input matInput type="number" placeholder="Max cena" [(ngModel)]="priceHigherBound">
               </mat-form-field>
-              </div>
-          </div>
-    </mat-grid-tile>
-</mat-grid-list>
+              <!-- </div> -->
+          <!-- </div> -->
+    <!-- </mat-grid-tile> -->
+<!-- </mat-grid-list> -->
+<p></p>
 
 <mat-spinner *ngIf="showSpinner" class="spiner"></mat-spinner>
 

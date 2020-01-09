@@ -18,7 +18,7 @@ export class TourComponent implements OnInit {
   }
 
   getLowestPrice() {
-    return Math.max(...this.tour.terms.map( term => term.price ))
+    return Math.min(...this.tour.terms.map( term => term.price ))
   }
 
   ngOnInit() { }
