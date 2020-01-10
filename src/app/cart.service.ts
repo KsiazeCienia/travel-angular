@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ToursService } from './tours.service';
 import { CartReservation } from './cart/cart-reservation'
 import { Observable, zip, merge } from 'rxjs';
+import { switchMap, map, flatMap} from 'rxjs/operators';
 import {Promise} from 'es6-promise';
 import { Tour } from './tour';
 
@@ -39,8 +40,22 @@ export class CartService {
       date: new Date()      
     }
     user.bookings.push(booking)
+
+    this.reservations.forEach( reservation => {
+      return this.toursService.getTour(reservation.tourID).subscribe( 
+        tour => {
+          const termIndex = tour.terms.findIndex( term => term.id == reservation.termID )
+          const res = tour.terms[termIndex].reservations.filter ( res => res.userID == user.uid )
+          tour.terms[termIndex].reservations = tour.terms[termIndex].reservations.filter( res => res.userID != user.uid )
+          tour.terms[termIndex].bookings = tour.terms[termIndex].bookings.concat(res)
+          console.log("Tour update")
+          return this.toursService.updateTour(tour)
+      })
+    })
+
     user.reservations = []
     this.reservations = []
+
     return this.firestore.collection('users').doc(user.uid).update(user)
   }
 
@@ -55,7 +70,7 @@ export class CartService {
     user.reservations.push(reservation)
 
     var requests = Promise.all([this.firestore.collection('users').doc(user.uid).update(user), 
-                                this.toursService.updateTermNumberOfPlaces(tour, termID, numberOfPlaces)])
+                                this.toursService.updateTermNumberOfPlaces(tour, termID, user, numberOfPlaces)])
     return requests
   }
 

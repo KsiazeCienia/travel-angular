@@ -38,7 +38,7 @@
               </div>
         </mat-card-content>
         <mat-card-actions >
-            <button mat-raised-button color="primary" *ngIf="user != null" (click)="bookClicked()">Zarezerwuj</button>
+            <button mat-raised-button color="primary" *ngIf="isBookButtonHidden()" (click)="bookClicked()">Zarezerwuj</button>
             <button mat-raised-button color="primary" *ngIf="isUserAdmin" (click)="deleteClicked()">Usuń</button>
         </mat-card-actions>
     </mat-card> 

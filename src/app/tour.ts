@@ -13,11 +13,17 @@ export interface Rate {
   rate: number
 }
 
+export interface TermReservation {
+  numberOfTakenPlaces: number
+  userID: string
+}
+
 export interface Term {
   id: string
   startDate: Date
   endDate: Date
   price: number
-  numberOfLeftPlaces: number
   numberOfPlaces: number
+  reservations: TermReservation[]
+  bookings: TermReservation[]
 }

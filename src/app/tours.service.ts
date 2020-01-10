@@ -44,14 +44,19 @@ export class ToursService {
     return this.database.collection('tours').add(tour)
   }
 
+  updateTour(tour: Tour) {
+    return this.database.doc(`tours/${tour.id}`).set(tour)
+  }
+
   updateTourRate(tour: Tour, user: MyUser ,rate: number) {
     tour.rates.push({userID: user.uid, rate: rate})
     return this.database.doc(`tours/${tour.id}`).set(tour)
   }
 
-  updateTermNumberOfPlaces(tour: Tour, termID: string, numberOfPlaces: number) {
-      const termIndex = tour.terms.findIndex(term => term.id = termID)
-      tour.terms[termIndex].numberOfLeftPlaces = tour.terms[termIndex].numberOfLeftPlaces - numberOfPlaces
+  updateTermNumberOfPlaces(tour: Tour, termID: string, user: MyUser, numberOfPlaces: number) {
+      const index = tour.terms.findIndex( term => term.id == termID )
+      const termReservation = { numberOfTakenPlaces: numberOfPlaces, userID: user.uid }
+      tour.terms[index].reservations.push(termReservation)
       return this.database.doc(`tours/${tour.id}`).set(tour) 
   }
 

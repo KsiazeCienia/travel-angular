@@ -73,7 +73,9 @@ export class TourDetailsComponent implements OnInit {
       return
     }
 
-    if (this.numberOfTakenPlaces > this.selectedTerm.numberOfLeftPlaces) {
+    const numberOfResPlaces = this.selectedTerm.reservations.map(res => res.numberOfTakenPlaces).reduce( (a,b) => a + b, 0)
+    const numberOfTakPlaces = this.selectedTerm.bookings.map(res => res.numberOfTakenPlaces).reduce( (a,b) => a + b, 0)
+    if (this.numberOfTakenPlaces > (numberOfResPlaces + numberOfTakPlaces)) {
       this.openSnackBar('Brak dostępnej ilości miejsc')
       return
     }
@@ -144,10 +146,15 @@ export class TourDetailsComponent implements OnInit {
   }
 
   isBookButtonHidden() {
-      return this.tour.terms[0].numberOfLeftPlaces == 0
-  }
+    if (!this.user) {
+      return false
+    }
 
-  isCancelButtonHidden() {
-    return this.tour.terms[0].numberOfPlaces == this.tour.terms[0].numberOfLeftPlaces
+    if (this.selectedTerm) {
+      const numberOfResPlaces = this.selectedTerm.reservations.map(res => res.numberOfTakenPlaces).reduce( (a,b) => a + b, 0)
+      const numberOfTakPlaces = this.selectedTerm.bookings.map(res => res.numberOfTakenPlaces).reduce( (a,b) => a + b, 0)
+      return (numberOfResPlaces + numberOfTakPlaces) < this.selectedTerm.numberOfPlaces
+    }
+    return false
   }
 }
