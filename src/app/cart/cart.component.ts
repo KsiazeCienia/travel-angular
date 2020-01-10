@@ -74,7 +74,8 @@ export class CartComponent implements OnInit {
         if (index > -1) {
           this.reservations.splice(index, 1)
         }
+        this.openSnackBar('Rezerwacja usunięta pomyślnie')
     })
-    .catch(error => console.log(error))
+    .catch(error => {this.openSnackBar('Błąd poczas usuwania rezerwacji')})
   }
 }
