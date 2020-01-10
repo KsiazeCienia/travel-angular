@@ -56,6 +56,6 @@ export class ToursService {
   }
 
   deleteTour(tour: Tour) {
-    return this.database.doc(`tours/${tour.id}`).delete
+    return this.database.doc(`tours/${tour.id}`).delete()
   }
 }

@@ -99,10 +99,14 @@ export class TourDetailsComponent implements OnInit {
   deleteClicked() {
     this.showSpinner = true
     this.toursService.deleteTour(this.tour)
-    .call( val => {
+    .then( val => {
       this.showSpinner = false
       this.openSnackBar('Wycieczka pomyślnie usunięta')
       this.router.navigate['/tours']
+    })
+    .catch( error => {
+      this.showSpinner = false
+      this.openSnackBar('Błąd podczas usuwanai wycieczki. Spróbuj ponownie później')
     })
   }
 
